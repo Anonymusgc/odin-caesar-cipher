@@ -4,17 +4,14 @@ def caesar_cipher(string, shift)
     char_num = char.ord
     case char_num
     when 97..122
-      (char_num + shift).chr
+      (char_num + shift) > 122 ? (96 + ((char_num + shift) - 122)).chr : (char_num + shift).chr
     when 65..90
-      (char_num + shift).chr
+      (char_num + shift) > 90 ? (64 + ((char_num + shift) - 90)).chr : (char_num + shift).chr
     else
       char
     end
-  end.join('')
-  # arr = word_arr.map do |word|
-  #   word.split('').map { |letter| (letter.ord + shift).chr }.join('')
-  # end.join(' ')
-  p arr
+  end
+  puts arr.join('')
 end
 
-caesar_cipher('A random sentence!', 1)
+caesar_cipher('Z random sentence!', 2)
