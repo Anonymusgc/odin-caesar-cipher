@@ -25,3 +25,4 @@ def caesar_cipher(string, shift)
 end
 
 caesar_cipher('What a string!', 5)
+caesar_cipher('Bmfy f xywnsl!', -5)
