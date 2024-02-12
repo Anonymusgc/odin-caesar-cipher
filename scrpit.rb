@@ -1,24 +1,27 @@
 # frozen_string_literal: true
 
-def char_in_range(char, shift)
-  char_num = char.ord
+def get_shifted_char(char_num, shift, min, max)
   char_after_shift = (char_num + shift)
-  case char_num
-  when 97..122
-    char_after_shift > 122 ? (96 + (char_after_shift - 122)).chr : char_after_shift.chr
-  when 65..90
-    char_after_shift > 90 ? (64 + (char_after_shift - 90)).chr : char_after_shift.chr
+  if char_after_shift > max
+    ((min - 1) + (char_after_shift - max)).chr
+  elsif char_after_shift < min
+    ((max + 1) + (char_after_shift - min)).chr
   else
-    char
+    char_after_shift.chr
   end
 end
 
 def caesar_cipher(string, shift)
   chars = string.split('')
   arr = chars.map do |char|
-    char_in_range(char, shift)
+    char_num = char.ord
+    case char_num
+    when 97..122 then get_shifted_char(char_num, shift, 97, 122)
+    when 65..90 then get_shifted_char(char_num, shift, 65, 90)
+    else char
+    end
   end
   puts arr.join('')
 end
 
-caesar_cipher('Z random sentence!', 2)
+caesar_cipher('What a string!', 5)
